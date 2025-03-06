@@ -1,1 +1,26 @@
-A
+import java.io.*;
+
+public class Q2 {
+    public static void main(String[] args) {
+        String filename="text1.txt";
+        int charCount=0;
+        String FilteredText="";
+
+        try {
+            BufferedReader reader=new BufferedReader(new FileReader(filename));
+            String line;
+            while((line=reader.readLine())!=null){
+                String cleanedLine=line.replaceAll(",", "");
+                FilteredText+=cleanedLine;
+                charCount+=cleanedLine.length();
+            }
+            
+            System.out.println("Filtered Text (Without Special Characters):");
+            System.out.println(FilteredText);
+            System.out.println("Total Number of Characters Retrieved: " + charCount);
+
+        } catch (Exception e) {
+            System.out.println("Error reading file:"+e.getMessage());
+        }
+    }
+}
