@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class StockTransaction {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Queue<Integer> shares = new LinkedList<>();
+        Queue<Integer> prices = new LinkedList<>();
+        int totalGainLoss = 0;
+
+        while (true) {
+            System.out.print("Enter transaction (buy/sell x at y), or 'done': ");
+            String input = sc.nextLine().toLowerCase().trim();
+
+            if (input.equals("done")) break;
+
+            String[] parts = input.split(" ");
+            String action = parts[0];
+            int quantity = Integer.parseInt(parts[1]);
+            int price = Integer.parseInt(parts[4].replace("$", ""));
+
+            if (action.equals("buy")) {
+                shares.add(quantity);
+                prices.add(price);
+            } else if (action.equals("sell")) {
+                int remaining = quantity;
+
+                while (remaining > 0 && !shares.isEmpty()) {
+                    int heldShares = shares.peek();
+                    int heldPrice = prices.peek();
+
+                    int sellQty = Math.min(heldShares, remaining);
+                    totalGainLoss += sellQty * (price - heldPrice);
+
+                    remaining -= sellQty;
+                    if (sellQty == heldShares) {
+                        shares.poll();
+                        prices.poll();
+                    } else {
+                        shares.poll();
+                        prices.poll();
+                        shares.add(heldShares - sellQty);
+                        prices.add(heldPrice);
+                    }
+                }
+            }
+        }
+
+        System.out.println("Total Capital Gain/Loss: $" + totalGainLoss);
+    }
+}
