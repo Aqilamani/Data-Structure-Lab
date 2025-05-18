@@ -1,0 +1,81 @@
+import java.util.LinkedList;
+
+class MyQueue<E> {
+    private LinkedList<E> list = new LinkedList<>();
+
+    public MyQueue(E[] e) {
+        for (E item : e) {
+            list.add(item);
+        }
+    }
+
+    public MyQueue() {}
+
+    public void enqueue(E e) {
+        list.addLast(e);
+    }
+
+    public E dequeue() {
+        return list.pollFirst();
+    }
+
+    public E getElement(int i) {
+        return list.get(i);
+    }
+
+    public E peek() {
+        return list.peekFirst();
+    }
+
+    public int getSize() {
+        return list.size();
+    }
+
+    public boolean contains(E e) {
+        return list.contains(e);
+    }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    public String tostring() {
+        return list.toString();
+    }
+}
+
+// Test Program
+public class TestMyQueue {
+    public static void main(String[] args) {
+        String[] fruits = {"Durian", "Blueberry"};
+        MyQueue<String> fruitQ = new MyQueue<>(fruits);
+
+        fruitQ.enqueue("Apple");
+        fruitQ.enqueue("Orange");
+        fruitQ.enqueue("Grapes");
+        fruitQ.enqueue("Cherry");
+
+        System.out.println("Queue: " + fruitQ.tostring());
+        System.out.println("Top item: " + fruitQ.peek());
+        System.out.println("Queue size: " + fruitQ.getSize());
+
+        // Remove Durian
+        MyQueue<String> tempQ = new MyQueue<>();
+        while (!fruitQ.isEmpty()) {
+            String item = fruitQ.dequeue();
+            if (!item.equals("Durian")) {
+                tempQ.enqueue(item);
+            }
+        }
+        fruitQ = tempQ;
+
+        System.out.println("Queue after removing Durian: " + fruitQ.tostring());
+        System.out.println("Item at index 2: " + fruitQ.getElement(2));
+        System.out.println("Contains Cherry? " + fruitQ.contains("Cherry"));
+        System.out.println("Contains Durian? " + fruitQ.contains("Durian"));
+
+        while (!fruitQ.isEmpty()) {
+            System.out.println("Dequeue: " + fruitQ.dequeue());
+        }
+    }
+}
