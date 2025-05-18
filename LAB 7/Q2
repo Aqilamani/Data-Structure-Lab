@@ -1,0 +1,22 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class PalindromeChecker {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine().toLowerCase().replaceAll("[^a-z0-9]", "");
+
+        Queue<Character> queue = new LinkedList<>();
+        StringBuilder reversed = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            reversed.insert(0, c);
+        }
+
+        boolean isPalindrome = input.equals(reversed.toString());
+        System.out.println("Is palindrome? " + isPalindrome);
+    }
+}
