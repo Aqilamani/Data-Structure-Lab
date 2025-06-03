@@ -1,0 +1,12 @@
+public class exponent {
+    public static long exponent(int a, int b) {
+        if (b == 0) {
+            return 1;
+        }
+        return a * exponent(a, b - 1);
+    }
+    public static void main(String[] args) {
+        System.out.println(exponent(10, 3));
+        System.out.println(exponent(2, 5)); 
+    }
+}
