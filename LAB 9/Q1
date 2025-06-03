@@ -1,1 +1,20 @@
-A
+public class SubtituteAI {
+    public static String subtituteAI(String str){
+        if(str.isEmpty()){
+            return "";
+        } 
+        char character = str.charAt(0);
+        if(character=='a'){
+            return 'i' + subtituteAI(str.substring(1));
+        }
+        else {
+            return character + subtituteAI(str.substring(1));
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(subtituteAI("flabbergasted"));
+        System.out.println(subtituteAI("Aqilamani"));
+    }
+}
+
